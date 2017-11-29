@@ -1,0 +1,15 @@
+<div>
+  <button
+    (click)="changeCurrentLanguage('hu')"
+    [disabled]="isCurrentLanguage('hu')"
+  >
+    HU
+  </button>
+
+  <button
+    (click)="changeCurrentLanguage('en')"
+    [disabled]="isCurrentLanguage('en')"
+  >
+    EN
+  </button>
+</div>
