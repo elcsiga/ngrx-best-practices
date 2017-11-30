@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AppState } from '../app.module';
 import { SetCurrentLanguageAction } from '../app-state/language';
+import { currentLanguageSelector } from '../app-state/language';
 
 @Component({
   selector: 'app-language-switch',
@@ -15,7 +16,7 @@ export class LanguageSwitchComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.subscription = this.store.select( state => state.language.currentLanguage)
+    this.subscription = this.store.select( currentLanguageSelector )
       .subscribe( currentLanguage => this.currentLanguage = currentLanguage);
   }
   ngOnDestroy() {

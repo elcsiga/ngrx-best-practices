@@ -1,19 +1,20 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.module';
 import { LocalizerService } from '../localizer/localizer.service';
-
+import { currentLanguageSelector } from '../app-state/language';
 
 @Component({
-  selector: 'app-localized-text',
-  templateUrl: './localized-text.component.html',
-  styleUrls: ['./localized-text.component.css']
+  selector: 'app-localized-button',
+  templateUrl: './localized-button.component.html',
+  styleUrls: ['./localized-button.component.css']
 })
-export class LocalizedTextComponent implements OnInit, OnDestroy {
+export class LocalizedButtonComponent implements OnInit, OnDestroy {
   private localizedText = '';
   private subscription: any;
 
   @Input() text;
+  @Output() clicked = new EventEmitter();
 
   constructor(
     private store: Store<AppState>,
@@ -21,8 +22,11 @@ export class LocalizedTextComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.store.select( state => state.language.currentLanguage)
+    this.subscription = this.store.select( currentLanguageSelector )
       .subscribe( currentLanguage => this.localizedText = this.localizer.translate(this.text, currentLanguage));
+  }
+  onClick() {
+    this.clicked.emit();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

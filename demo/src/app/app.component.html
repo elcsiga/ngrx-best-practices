@@ -1,10 +1,19 @@
 <app-language-switch></app-language-switch>
 
+<hr />
+
 <p>
-  The current language is: {{currentLanguage$ | async}}
+  <app-localized-button
+    text="Bear"
+    (click)="selectAnimal('bear')"
+  ></app-localized-button>
+
+  <app-localized-button
+    text="Cat"
+    (click)="selectAnimal('cat')">
+  </app-localized-button>
 </p>
 
 <p>
-  <app-localized-text text="Bear rulez!"></app-localized-text>
-  <app-localized-text text="Cat rocks!"></app-localized-text>
+  {{details$ | async}}
 </p>
