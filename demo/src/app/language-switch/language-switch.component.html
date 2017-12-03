@@ -1,14 +1,14 @@
 <div>
   <button
-    (click)="changeCurrentLanguage('hu')"
-    [disabled]="isCurrentLanguage('hu')"
+    (click)="changeCurrentLanguage(LanguageCode.hu)"
+    [disabled]="isCurrentLanguage(LanguageCode.hu)"
   >
     HU
   </button>
 
   <button
-    (click)="changeCurrentLanguage('en')"
-    [disabled]="isCurrentLanguage('en')"
+    (click)="changeCurrentLanguage(LanguageCode.en)"
+    [disabled]="isCurrentLanguage(LanguageCode.en)"
   >
     EN
   </button>

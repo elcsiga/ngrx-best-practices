@@ -1,14 +1,15 @@
 import { Action } from '@ngrx/store';
+import { Animal } from './common-types';
 
 export const SET_CURRENT_ANIMAL = 'SET_CURRENT_ANIMAL';
 
 // STATE DEFINITION
 
 export interface AnimalViewState {
-  currentAnimal: string;
+  currentAnimal: Animal;
 }
-const initialStat6e = {
-  currentAnimal: 'bear'
+const initialState = {
+  currentAnimal: Animal.bear
 };
 
 // SELECTORS
@@ -17,12 +18,12 @@ const initialStat6e = {
 
 export class SetCurrentAnimalAction implements Action {
   type: string = SET_CURRENT_ANIMAL;
-  constructor( public currentAnimal: string ) {}
+  constructor( public currentAnimal: Animal ) {}
 }
 
 // REDUCER
 
-export function animalViewReducer(state: AnimalViewState = initialStat6e, action: Action): AnimalViewState {
+export function animalViewReducer(state: AnimalViewState = initialState, action: Action): AnimalViewState {
   switch (action.type) {
     case SET_CURRENT_ANIMAL:
       return setCurrentAnimalActionHandler(state, action);

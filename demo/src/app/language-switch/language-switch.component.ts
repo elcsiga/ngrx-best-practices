@@ -1,9 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { AppState } from '../app.module';
-import { SetCurrentLanguageAction } from '../app-state/language';
-import { currentLanguageSelector } from '../app-state/language';
+import { SetCurrentLanguageAction, currentLanguageSelector } from '../app-state/language';
+import { LanguageCode } from '../app-state/common-types';
+
+/*
+ This is a pure container component
+ Even small components can be a container if they reflect a given
+ segment of the store and therefore are not reusable in other contexts
+ */
 
 @Component({
   selector: 'app-language-switch',
@@ -11,8 +16,10 @@ import { currentLanguageSelector } from '../app-state/language';
   styleUrls: ['./language-switch.component.css']
 })
 export class LanguageSwitchComponent implements OnInit, OnDestroy {
-  private currentLanguage: string = '';
+  private currentLanguage = LanguageCode.hu;
   private subscription: any;
+  public LanguageCode = LanguageCode; // to make it available in the template, too
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -22,11 +29,10 @@ export class LanguageSwitchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  changeCurrentLanguage(lang: string): void {
-    this.store.dispatch(new SetCurrentLanguageAction(lang));
+  changeCurrentLanguage(language: LanguageCode): void {
+    this.store.dispatch(new SetCurrentLanguageAction(language));
   }
-
-  isCurrentLanguage (lang: string): boolean {
-    return lang === this.currentLanguage;
+  isCurrentLanguage (language: LanguageCode): boolean {
+    return language === this.currentLanguage;
   }
 }

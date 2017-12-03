@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+/*
+  Dummy component for translating to hungarian
+ */
+
 @Injectable()
 export class LocalizerService {
 

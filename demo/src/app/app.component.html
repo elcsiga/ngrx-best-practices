@@ -4,16 +4,16 @@
 
 <p>
   <app-localized-button
-    text="Bear"
+    label="Bear"
     (click)="selectAnimal('bear')"
   ></app-localized-button>
 
   <app-localized-button
-    text="Cat"
+    label="Cat"
     (click)="selectAnimal('cat')">
   </app-localized-button>
 </p>
 
 <p>
-  {{details$ | async}}
+  {{animalDetails$ | async}}
 </p>

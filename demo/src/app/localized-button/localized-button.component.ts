@@ -4,6 +4,13 @@ import { AppState } from '../app.module';
 import { LocalizerService } from '../localizer/localizer.service';
 import { currentLanguageSelector } from '../app-state/language';
 
+
+/*
+  A mixed container-component approach:
+  - it uses data binding for button label and click event
+  - it receives current language from the store
+ */
+
 @Component({
   selector: 'app-localized-button',
   templateUrl: './localized-button.component.html',
@@ -13,7 +20,7 @@ export class LocalizedButtonComponent implements OnInit, OnDestroy {
   private localizedText = '';
   private subscription: any;
 
-  @Input() text;
+  @Input() label;
   @Output() clicked = new EventEmitter();
 
   constructor(
@@ -23,7 +30,7 @@ export class LocalizedButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.select( currentLanguageSelector )
-      .subscribe( currentLanguage => this.localizedText = this.localizer.translate(this.text, currentLanguage));
+      .subscribe( currentLanguage => this.localizedText = this.localizer.translate(this.label, currentLanguage));
   }
   onClick() {
     this.clicked.emit();

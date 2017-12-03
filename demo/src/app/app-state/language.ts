@@ -1,14 +1,15 @@
 import { Action } from '@ngrx/store';
+import { LanguageCode } from './common-types';
 
 export const SET_CURRENT_LANGUAGE = 'SET_CURRENT_LANGUAGE';
 
 // STATE DEFINITION
 
 export interface LanguageState {
-  currentLanguage: string;
+  currentLanguage: LanguageCode;
 }
 const initialStat6e = {
-  currentLanguage: 'hu'
+  currentLanguage: LanguageCode.hu
 };
 
 // SELECTORS
@@ -19,7 +20,7 @@ export const currentLanguageSelector = state => state.language.currentLanguage;
 
 export class SetCurrentLanguageAction implements Action {
   type: string = SET_CURRENT_LANGUAGE;
-  constructor( public currentLanguage: string ) {}
+  constructor( public currentLanguage: LanguageCode ) {}
 }
 
 // REDUCER
